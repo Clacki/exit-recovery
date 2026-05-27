@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import AppLayout from "@/components/layout/AppLayout";
 
 import "./globals.css";
-import { Providers } from "./provider";
+import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: "EXIT",
