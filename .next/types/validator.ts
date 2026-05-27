@@ -36,10 +36,118 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 }
 
 
+// Validate ../../src/app/currentProject/[projectId]/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/currentProject/[projectId]">> = Specific
+  const handler = {} as typeof import("../../src/app/currentProject/[projectId]/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/exited/[projectId]/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/exited/[projectId]">> = Specific
+  const handler = {} as typeof import("../../src/app/exited/[projectId]/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/exited/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/exited">> = Specific
+  const handler = {} as typeof import("../../src/app/exited/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/exiter/[userId]/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/exiter/[userId]">> = Specific
+  const handler = {} as typeof import("../../src/app/exiter/[userId]/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/exiter/userList/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/exiter/userList">> = Specific
+  const handler = {} as typeof import("../../src/app/exiter/userList/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/exiting/[projectId]/edit/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/exiting/[projectId]/edit">> = Specific
+  const handler = {} as typeof import("../../src/app/exiting/[projectId]/edit/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/exiting/[projectId]/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/exiting/[projectId]">> = Specific
+  const handler = {} as typeof import("../../src/app/exiting/[projectId]/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/exiting/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/exiting">> = Specific
+  const handler = {} as typeof import("../../src/app/exiting/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/exiting/write/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/exiting/write">> = Specific
+  const handler = {} as typeof import("../../src/app/exiting/write/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/myPage/edit/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/myPage/edit">> = Specific
+  const handler = {} as typeof import("../../src/app/myPage/edit/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/myPage/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/myPage">> = Specific
+  const handler = {} as typeof import("../../src/app/myPage/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/">> = Specific
   const handler = {} as typeof import("../../src/app/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/search/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/search">> = Specific
+  const handler = {} as typeof import("../../src/app/search/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

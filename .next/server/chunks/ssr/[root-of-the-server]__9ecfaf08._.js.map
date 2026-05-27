@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/qwer6/Desktop/exit-recovery/src/app/providers.tsx"],"sourcesContent":["\"use client\";\n\ntype ProvidersProps = {\n  children: React.ReactNode;\n};\n\nexport default function Providers({ children }: ProvidersProps) {\n  // TODO: Add app-wide client providers here as they are restored.\n  // Examples: RecoilRoot, ApolloProvider, Emotion CacheProvider.\n  return <>{children}</>;\n}\n"],"names":[],"mappings":";;;;;AAAA;;AAMe,SAAS,UAAU,EAAE,QAAQ,EAAkB;IAC5D,iEAAiE;IACjE,+DAA+D;IAC/D,qBAAO;kBAAG;;AACZ","debugId":null}}]
+}
