@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/qwer6/Desktop/exit-recovery/src/app/provider.tsx"],"sourcesContent":["import { RecoilRoot } from \"recoil\";\r\n\r\ntype ProvidersProps = {\r\n  children: React.ReactNode;\r\n};\r\n\r\nexport function Providers({ children }: ProvidersProps) {\r\n  return <RecoilRoot>{children}</RecoilRoot>;\r\n}\r\n"],"names":[],"mappings":";;;;;AAAA;;;AAMO,SAAS,UAAU,EAAE,QAAQ,EAAkB;IACpD,qBAAO,8OAAC,mJAAU;kBAAE;;;;;;AACtB","debugId":null}},
+    {"offset": {"line": 25, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/qwer6/Desktop/exit-recovery/src/app/layout.tsx"],"sourcesContent":["import type { Metadata } from \"next\";\nimport \"./globals.css\";\nimport { Providers } from \"./provider\";\n\nexport const metadata: Metadata = {\n  title: \"EXIT Recovery\",\n  description: \"EXIT project recovery\",\n};\n\nexport default function RootLayout({\n  children,\n}: Readonly<{\n  children: React.ReactNode;\n}>) {\n  return (\n    <html lang=\"ko\">\n      <body>\n        <Providers>{children}</Providers>\n      </body>\n    </html>\n  );\n}\n"],"names":[],"mappings":";;;;;;;AAEA;;;;AAEO,MAAM,WAAqB;IAChC,OAAO;IACP,aAAa;AACf;AAEe,SAAS,WAAW,EACjC,QAAQ,EAGR;IACA,qBACE,8OAAC;QAAK,MAAK;kBACT,cAAA,8OAAC;sBACC,cAAA,8OAAC,oIAAS;0BAAE;;;;;;;;;;;;;;;;AAIpB","debugId":null}}]
+}
