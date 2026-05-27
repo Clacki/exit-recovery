@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/qwer6/Desktop/exit-recovery/src/app/globals.css"],"sourcesContent":[":root {\n  --color-background: #ffffff;\n  --color-foreground: #111111;\n\n  --color-primary: #2563eb;\n  --color-primary-foreground: #ffffff;\n\n  --color-muted: #f5f5f5;\n  --color-muted-foreground: #666666;\n\n  --radius-sm: 4px;\n  --radius-md: 8px;\n  --radius-lg: 12px;\n}\n\n* {\n  box-sizing: border-box;\n}\n\nhtml,\nbody {\n  margin: 0;\n  padding: 0;\n  min-height: 100%;\n}\n\nbody {\n  background: var(--color-background);\n  color: var(--color-foreground);\n}\n\na {\n  color: inherit;\n  text-decoration: none;\n}\n\nbutton,\ninput,\ntextarea,\nselect {\n  font: inherit;\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;;;;AAeA;;;;AAIA;;;;;;AAOA;;;;;AAKA;;;;;AAKA","debugId":null}}]
-}

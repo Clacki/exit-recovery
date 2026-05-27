@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
-    {"offset": {"line": 11, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/qwer6/Desktop/exit-recovery/src/app/page.tsx"],"sourcesContent":["export default function HomePage() {\n  return (\n    <main>\n      <h1>EXIT Home</h1>\n      <p>Route: /</p>\n    </main>\n  );\n}\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,8OAAC;;0BACC,8OAAC;0BAAG;;;;;;0BACJ,8OAAC;0BAAE;;;;;;;;;;;;AAGT","debugId":null}}]
-}
