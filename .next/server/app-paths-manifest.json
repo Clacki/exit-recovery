@@ -1,4 +1,16 @@
 {
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/page": "app/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/currentProject/[projectId]/page": "app/currentProject/[projectId]/page.js",
+  "/exited/[projectId]/page": "app/exited/[projectId]/page.js",
+  "/exited/page": "app/exited/page.js",
+  "/exiter/[userId]/page": "app/exiter/[userId]/page.js",
+  "/exiter/userList/page": "app/exiter/userList/page.js",
+  "/exiting/[projectId]/edit/page": "app/exiting/[projectId]/edit/page.js",
+  "/exiting/[projectId]/page": "app/exiting/[projectId]/page.js",
+  "/exiting/page": "app/exiting/page.js",
+  "/exiting/write/page": "app/exiting/write/page.js",
+  "/myPage/edit/page": "app/myPage/edit/page.js",
+  "/myPage/page": "app/myPage/page.js",
+  "/page": "app/page.js",
+  "/search/page": "app/search/page.js"
 }

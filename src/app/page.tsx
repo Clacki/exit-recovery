@@ -1,5 +1,8 @@
-import MainPage from "@/features/main/MainPage";
-
-export default function Home() {
-  return <MainPage />;
+export default function HomePage() {
+  return (
+    <main>
+      <h1>EXIT Home</h1>
+      <p>Route: /</p>
+    </main>
+  );
 }
