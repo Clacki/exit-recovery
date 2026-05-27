@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/qwer6/Desktop/exit-recovery/src/app/provider.tsx"],"sourcesContent":["\"use client\";\r\n\r\nimport { RecoilRoot } from \"recoil\";\r\n\r\ntype ProvidersProps = {\r\n  children: React.ReactNode;\r\n};\r\n\r\nexport function Providers({ children }: ProvidersProps) {\r\n  return <RecoilRoot>{children}</RecoilRoot>;\r\n}\r\n"],"names":[],"mappings":";;;;;AAEA;AAFA;;;AAQO,SAAS,UAAU,KAA4B;QAA5B,EAAE,QAAQ,EAAkB,GAA5B;IACxB,qBAAO,6LAAC,sJAAU;kBAAE;;;;;;AACtB;KAFgB","debugId":null}}]
+}
