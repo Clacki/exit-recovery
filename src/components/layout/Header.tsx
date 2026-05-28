@@ -1,6 +1,13 @@
 import Link from "next/link";
 
-const navItems = ["홈", "소개", "서비스", "문의"];
+const navItems = [
+  { href: "/", label: "홈" },
+  { href: "/exiting", label: "진행 프로젝트" },
+  { href: "/exited", label: "완료 프로젝트" },
+  { href: "/exiter/userList", label: "유저 목록" },
+  { href: "/search", label: "검색" },
+  { href: "/myPage", label: "마이페이지" },
+];
 
 export default function Header() {
   return (
@@ -13,10 +20,10 @@ export default function Header() {
         <nav className="site-header__nav" aria-label="주요 메뉴">
           <ul className="site-header__nav-list">
             {navItems.map((item) => (
-              <li key={item}>
-                <a className="site-header__nav-link" href="#">
-                  {item}
-                </a>
+              <li key={item.href}>
+                <Link className="site-header__nav-link" href={item.href}>
+                  {item.label}
+                </Link>
               </li>
             ))}
           </ul>
