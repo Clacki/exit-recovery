@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
-import AppLayout from "@/components/layout/AppLayout";
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
 
 import "./globals.css";
 import Providers from "./providers";
@@ -19,7 +20,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="ko">
       <body>
         <Providers>
-          <AppLayout>{children}</AppLayout>
+          <Header />
+          <main className="app-main">{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>
