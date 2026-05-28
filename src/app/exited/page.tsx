@@ -1,8 +1,12 @@
+import PageLayout from "@/components/layout/PageLayout";
+
 export default function CompletedProjectsPage() {
   return (
-    <main>
-      <h1>Completed Projects</h1>
-      <p>Route: /exited</p>
-    </main>
+    <PageLayout>
+      <section className="route-shell" aria-labelledby="exited-title">
+        <h1 id="exited-title">Completed Projects</h1>
+        <p>Route: /exited</p>
+      </section>
+    </PageLayout>
   );
 }

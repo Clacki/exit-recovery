@@ -24,6 +24,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <main className="app-main">{children}</main>
           <Footer />
         </Providers>
+        <div id="modal-root" />
       </body>
     </html>
   );
