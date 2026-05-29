@@ -11,7 +11,16 @@ const statusLabels: Record<ProjectStatus, string> = {
   completed: "완료",
 };
 
-const categories = ["공유 서비스", "여행", "이커머스", "O2O", "엔터테인먼트", "모빌리티", "뷰티/패션", "헬스/스포츠"];
+const categories = [
+  { label: "공유 서비스", image: "/images/main/category-community.png" },
+  { label: "여행", image: "/images/main/category-travel.png" },
+  { label: "이커머스", image: "/images/main/category-commerce.png" },
+  { label: "O2O", image: "/images/main/category-o2o.png" },
+  { label: "엔터테인먼트", image: "/images/main/category-entertainment.png" },
+  { label: "모빌리티", image: "/images/main/category-mobility.png" },
+  { label: "뷰티/패션", image: "/images/main/category-beauty-fashion.png" },
+  { label: "헬스/스포츠", image: "/images/main/category-health-sports.png" },
+];
 
 function getProjectHref(project: Project) {
   return project.status === "completed" ? `/exited/${project.id}` : `/exiting/${project.id}`;
@@ -29,9 +38,9 @@ function ProjectCard({ project }: { project: Project }) {
       href={getProjectHref(project)}
       className="group flex min-h-[420px] flex-col overflow-hidden rounded-lg bg-white shadow-[0_18px_45px_rgba(17,24,39,0.08)] ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(17,24,39,0.12)]"
     >
-      <div className="relative flex min-h-56 flex-1 items-end overflow-hidden bg-emerald-50">
+      <div className="relative flex min-h-56 flex-1 items-end overflow-hidden bg-[#111827]">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-75 transition duration-300 group-hover:scale-105"
+          className="absolute inset-0 bg-cover bg-center opacity-90 transition duration-300 group-hover:scale-105"
           style={{ backgroundImage: `url(${project.thumbnailImage})` }}
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.08)_0%,rgba(0,0,0,0.62)_100%)]" />
@@ -110,7 +119,7 @@ function MakerCard({ user }: { user: User }) {
       className="rounded-lg bg-white p-5 ring-1 ring-gray-200 transition hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(17,24,39,0.08)]"
     >
       <div
-        className="mb-5 h-24 w-24 rounded-lg bg-cover bg-center bg-gray-100"
+        className="mb-5 h-24 w-24 rounded-full bg-cover bg-center bg-gray-100 ring-4 ring-emerald-50"
         style={{ backgroundImage: `url(${user.profileImage})` }}
       />
       <p className="text-lg font-black text-gray-950">{user.name}</p>
@@ -131,11 +140,11 @@ export default function MainPage() {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-40"
           style={{
-            backgroundImage: "url(/images/common/main-hero.png)",
+            backgroundImage: "url(/images/main/main-hero.png)",
           }}
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(16,21,16,0.96)_0%,rgba(16,21,16,0.7)_48%,rgba(16,21,16,0.42)_100%)]" />
-        <div className="relative mx-auto grid min-h-[520px] w-full max-w-[1280px] items-center gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:px-10">
+        <div className="relative mx-auto grid min-h-[560px] w-full max-w-[1280px] items-center gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:px-10">
           <div>
             <p className="mb-5 text-lg font-extrabold text-emerald-300">exiting에서 취업으로 가는 프로젝트</p>
             <h1 className="max-w-3xl text-5xl font-black leading-tight sm:text-6xl">지금 바로 EXIT</h1>
@@ -189,11 +198,16 @@ export default function MainPage() {
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {categories.map((category) => (
               <Link
-                key={category}
+                key={category.label}
                 href="/exiting"
-                className="flex h-24 items-center justify-center rounded-lg bg-white px-3 text-center text-base font-black text-gray-900 ring-1 ring-gray-200 transition hover:bg-emerald-500 hover:text-white"
+                className="group relative flex h-32 items-end overflow-hidden rounded-lg bg-white p-4 text-base font-black text-white ring-1 ring-gray-200 transition hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(17,24,39,0.1)]"
               >
-                {category}
+                <span
+                  className="absolute inset-0 bg-cover bg-center transition duration-300 group-hover:scale-105"
+                  style={{ backgroundImage: `url(${category.image})` }}
+                />
+                <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,39,0.05)_0%,rgba(17,24,39,0.72)_100%)]" />
+                <span className="relative">{category.label}</span>
               </Link>
             ))}
           </div>
