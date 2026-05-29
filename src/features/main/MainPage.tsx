@@ -1,3 +1,243 @@
+import { mockProjects } from "@/data/mockProjects";
+import { mockUsers } from "@/data/mockUsers";
+import type { Project, ProjectStatus } from "@/types/project";
+import type { User } from "@/types/user";
+import Link from "next/link";
+import { FiArrowRight, FiHeart, FiUsers } from "react-icons/fi";
+
+const statusLabels: Record<ProjectStatus, string> = {
+  recruiting: "모집 중",
+  inProgress: "진행 중",
+  completed: "완료",
+};
+
+const categories = ["공유 서비스", "여행", "이커머스", "O2O", "엔터테인먼트", "모빌리티", "뷰티/패션", "헬스/스포츠"];
+
+function getProjectHref(project: Project) {
+  return project.status === "completed" ? `/exited/${project.id}` : `/exiting/${project.id}`;
+}
+
+function getUserName(userId: string) {
+  return mockUsers.find((user) => user.id === userId)?.name ?? "EXIT 팀";
+}
+
+function ProjectCard({ project }: { project: Project }) {
+  const memberLabel = `${project.participantIds.length}/${project.targetMemberCount}`;
+
+  return (
+    <Link
+      href={getProjectHref(project)}
+      className="group flex min-h-[420px] flex-col overflow-hidden rounded-lg bg-white shadow-[0_18px_45px_rgba(17,24,39,0.08)] ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(17,24,39,0.12)]"
+    >
+      <div className="relative flex min-h-56 flex-1 items-end overflow-hidden bg-emerald-50">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-75 transition duration-300 group-hover:scale-105"
+          style={{ backgroundImage: `url(${project.thumbnailImage})` }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.08)_0%,rgba(0,0,0,0.62)_100%)]" />
+        <div className="relative flex w-full items-end justify-between gap-4 p-5 text-white">
+          <div className="flex items-center gap-4 text-sm font-semibold">
+            <span className="inline-flex items-center gap-1.5">
+              <FiUsers aria-hidden="true" />
+              {memberLabel}
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <FiHeart aria-hidden="true" />
+              {project.tags.length}
+            </span>
+          </div>
+          <span className="rounded bg-white/90 px-2.5 py-1 text-xs font-bold text-gray-900">
+            {statusLabels[project.status]}
+          </span>
+        </div>
+      </div>
+
+      <div className="flex min-h-48 flex-col justify-between bg-[#f8f8f8] p-5">
+        <div>
+          <p className="mb-2 text-sm font-bold text-emerald-600">{project.category}</p>
+          <h3 className="text-xl font-bold leading-snug text-gray-950">{project.title}</h3>
+          <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">{project.summary}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {project.tags.slice(0, 3).map((tag) => (
+              <span
+                key={tag}
+                className="rounded bg-white px-2.5 py-1 text-xs font-semibold text-gray-600 ring-1 ring-gray-200"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="mt-5 flex items-center justify-between text-sm text-gray-500">
+          <span>{getUserName(project.authorId)}</span>
+          <span>{project.startedAt ?? project.createdAt}</span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function ProjectSection({ eyebrow, title, projects }: { eyebrow: string; title: string; projects: Project[] }) {
+  return (
+    <section className="mx-auto w-full max-w-[1280px] px-5 py-14 sm:px-8 lg:px-10">
+      <div className="mb-8 flex items-end justify-between gap-5">
+        <div>
+          <p className="mb-2 text-lg font-extrabold text-emerald-500">{eyebrow}</p>
+          <h2 className="text-3xl font-black leading-tight text-gray-950 sm:text-4xl">{title}</h2>
+        </div>
+        <Link
+          href="/exiting"
+          className="hidden shrink-0 items-center gap-2 text-sm font-bold text-gray-400 transition hover:text-emerald-600 sm:inline-flex"
+        >
+          전체 프로젝트 보기
+          <FiArrowRight aria-hidden="true" />
+        </Link>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {projects.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function MakerCard({ user }: { user: User }) {
+  return (
+    <Link
+      href={`/exiter/${user.id}`}
+      className="rounded-lg bg-white p-5 ring-1 ring-gray-200 transition hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(17,24,39,0.08)]"
+    >
+      <div
+        className="mb-5 h-24 w-24 rounded-lg bg-cover bg-center bg-gray-100"
+        style={{ backgroundImage: `url(${user.profileImage})` }}
+      />
+      <p className="text-lg font-black text-gray-950">{user.name}</p>
+      <p className="mt-1 text-sm font-bold text-emerald-600">{user.role}</p>
+      <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">{user.bio}</p>
+    </Link>
+  );
+}
+
 export default function MainPage() {
-  return <div>MainPage</div>;
+  const recruitingProjects = mockProjects.filter((project) => project.status === "recruiting");
+  const activeProjects = mockProjects.filter((project) => project.status === "inProgress");
+  const completedProjects = mockProjects.filter((project) => project.status === "completed");
+
+  return (
+    <div className="bg-white">
+      <section className="relative overflow-hidden bg-[#101510] text-white">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-40"
+          style={{
+            backgroundImage: "url(/images/common/main-hero.png)",
+          }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(16,21,16,0.96)_0%,rgba(16,21,16,0.7)_48%,rgba(16,21,16,0.42)_100%)]" />
+        <div className="relative mx-auto grid min-h-[520px] w-full max-w-[1280px] items-center gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:px-10">
+          <div>
+            <p className="mb-5 text-lg font-extrabold text-emerald-300">exiting에서 취업으로 가는 프로젝트</p>
+            <h1 className="max-w-3xl text-5xl font-black leading-tight sm:text-6xl">지금 바로 EXIT</h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-200">
+              혼자 멈춰 있던 아이디어를 팀 프로젝트로 회복하고, 작은 결과물을 다음 기회로 연결해보세요.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/exiting"
+                className="inline-flex items-center gap-2 rounded-md bg-emerald-500 px-5 py-3 text-sm font-black text-white transition hover:bg-emerald-400"
+              >
+                프로젝트 둘러보기
+                <FiArrowRight aria-hidden="true" />
+              </Link>
+              <Link
+                href="/exiting/write"
+                className="inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-black text-gray-950 transition hover:bg-gray-100"
+              >
+                프로젝트 만들기
+              </Link>
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+            {[
+              ["모집 중", recruitingProjects.length],
+              ["진행 중", activeProjects.length],
+              ["완료", completedProjects.length],
+            ].map(([label, count]) => (
+              <div key={label} className="rounded-lg bg-white/10 p-5 ring-1 ring-white/15 backdrop-blur">
+                <p className="text-sm font-bold text-gray-300">{label}</p>
+                <p className="mt-2 text-4xl font-black">{count}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <ProjectSection eyebrow="exiting" title="새로운 동료를 기다리는 프로젝트" projects={recruitingProjects} />
+
+      <ProjectSection eyebrow="current" title="지금 함께 진행 중인 프로젝트" projects={activeProjects} />
+
+      <section className="bg-[#f8f8f8]">
+        <div className="mx-auto w-full max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10">
+          <div className="mb-8 flex items-end justify-between gap-5">
+            <div>
+              <p className="mb-2 text-lg font-extrabold text-emerald-500">category</p>
+              <h2 className="text-3xl font-black leading-tight text-gray-950 sm:text-4xl">관심 카테고리</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {categories.map((category) => (
+              <Link
+                key={category}
+                href="/exiting"
+                className="flex h-24 items-center justify-center rounded-lg bg-white px-3 text-center text-base font-black text-gray-900 ring-1 ring-gray-200 transition hover:bg-emerald-500 hover:text-white"
+              >
+                {category}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <ProjectSection eyebrow="exited" title="완료된 프로젝트의 회복 사례" projects={completedProjects} />
+
+      <section className="mx-auto w-full max-w-[1280px] px-5 py-14 sm:px-8 lg:px-10">
+        <div className="mb-8 flex items-end justify-between gap-5">
+          <div>
+            <p className="mb-2 text-lg font-extrabold text-emerald-500">exiter</p>
+            <h2 className="text-3xl font-black leading-tight text-gray-950 sm:text-4xl">프로젝트를 함께할 엑시터</h2>
+          </div>
+          <Link
+            href="/exiter/userList"
+            className="hidden shrink-0 items-center gap-2 text-sm font-bold text-gray-400 transition hover:text-emerald-600 sm:inline-flex"
+          >
+            엑시터 더보기
+            <FiArrowRight aria-hidden="true" />
+          </Link>
+        </div>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {mockUsers.map((user) => (
+            <MakerCard key={user.id} user={user} />
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-[1280px] px-5 pb-20 sm:px-8 lg:px-10">
+        <div className="flex flex-col items-start justify-between gap-8 rounded-lg bg-emerald-500 p-8 text-white sm:flex-row sm:items-center lg:p-12">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.18em]">EXIT</p>
+            <p className="mt-3 text-2xl font-black leading-snug sm:text-3xl">당신을 기다리는 다양한 신규 프로젝트</p>
+          </div>
+          <Link
+            href="/exiting"
+            className="inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-black text-emerald-700 transition hover:bg-emerald-50"
+          >
+            바로 참여하기
+            <FiArrowRight aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+    </div>
+  );
 }

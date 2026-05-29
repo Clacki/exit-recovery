@@ -4,7 +4,7 @@ const navItems = [
   { href: "/", label: "홈" },
   { href: "/exiting", label: "진행 프로젝트" },
   { href: "/exited", label: "완료 프로젝트" },
-  { href: "/exiter/userList", label: "유저 목록" },
+  { href: "/exiter/userList", label: "엑시터 목록" },
   { href: "/search", label: "검색" },
   { href: "/myPage", label: "마이페이지" },
 ];
