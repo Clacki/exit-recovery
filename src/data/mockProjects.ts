@@ -1,0 +1,67 @@
+import type { Project } from "@/types/project";
+
+export const mockProjects: Project[] = [
+  {
+    id: "project-001",
+    title: "습관 회복 대시보드",
+    summary: "번아웃 이후 작은 일상 습관을 다시 시작하도록 돕는 대시보드입니다.",
+    description:
+      "작은 습관 회복 목표, 주간 회고, 재시작 기록을 확인할 수 있는 가벼운 대시보드를 설계하고 구현합니다.",
+    status: "recruiting",
+    category: "생산성",
+    tags: ["대시보드", "습관", "웰니스"],
+    thumbnailImage: "/images/common/project-habit-dashboard.png",
+    authorId: "user-001",
+    participantIds: ["user-001", "user-002"],
+    targetMemberCount: 4,
+    createdAt: "2026-05-18",
+  },
+  {
+    id: "project-002",
+    title: "로컬 창업자 인터뷰 아카이브",
+    summary: "창업자 인터뷰와 회복 이야기를 검색할 수 있는 아카이브입니다.",
+    description:
+      "종료나 피벗을 경험한 뒤 다시 프로젝트를 시작한 창업자들의 인터뷰를 수집, 분류, 전시합니다.",
+    status: "inProgress",
+    category: "커뮤니티",
+    tags: ["인터뷰", "아카이브", "검색"],
+    thumbnailImage: "/images/common/project-interview-archive.png",
+    authorId: "user-003",
+    participantIds: ["user-002", "user-003", "user-004"],
+    targetMemberCount: 5,
+    createdAt: "2026-04-29",
+    startedAt: "2026-05-06",
+  },
+  {
+    id: "project-003",
+    title: "종료 체크리스트 빌더",
+    summary: "중요한 자산을 놓치지 않고 프로젝트를 정리하도록 돕는 체크리스트 도구입니다.",
+    description:
+      "프로젝트 종료, 자산 인수인계, 회고 기록, 다음 단계 정리를 위한 재사용 가능한 체크리스트 템플릿을 만듭니다.",
+    status: "completed",
+    category: "운영",
+    tags: ["체크리스트", "회고", "인수인계"],
+    thumbnailImage: "/images/common/project-exit-checklist.png",
+    authorId: "user-004",
+    participantIds: ["user-001", "user-004"],
+    targetMemberCount: 2,
+    createdAt: "2026-03-12",
+    startedAt: "2026-03-19",
+    completedAt: "2026-04-21",
+  },
+  {
+    id: "project-004",
+    title: "회복 스프린트 매칭",
+    summary: "메이커들이 짧은 회복 스프린트를 함께 시작할 수 있는 매칭 보드입니다.",
+    description:
+      "역할, 목표, 가능한 시간을 기준으로 2주짜리 회복 스프린트에 참여할 수 있는 매칭 흐름을 프로토타입으로 만듭니다.",
+    status: "recruiting",
+    category: "매칭",
+    tags: ["스프린트", "매칭", "프로토타입"],
+    thumbnailImage: "/images/common/project-sprint-matching.png",
+    authorId: "user-002",
+    participantIds: ["user-002", "user-003"],
+    targetMemberCount: 6,
+    createdAt: "2026-05-24",
+  },
+];
