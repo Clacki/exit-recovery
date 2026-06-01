@@ -1,12 +1,5 @@
-import PageLayout from "@/components/layout/PageLayout";
+import ExitingProjectListPage from "@/features/exiting/ExitingProjectListPage";
 
 export default function OngoingProjectsPage() {
-  return (
-    <PageLayout>
-      <section className="route-shell" aria-labelledby="exiting-title">
-        <h1 id="exiting-title">Ongoing Projects</h1>
-        <p>Route: /exiting</p>
-      </section>
-    </PageLayout>
-  );
+  return <ExitingProjectListPage />;
 }
