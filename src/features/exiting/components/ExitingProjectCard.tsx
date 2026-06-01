@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FiArrowRight, FiCalendar, FiUsers } from "react-icons/fi";
+import { FiCalendar, FiHeart, FiShield, FiUsers } from "react-icons/fi";
 
 import { mockUsers } from "@/data/mockUsers";
 import type { Project } from "@/types/project";
@@ -18,19 +18,22 @@ function formatDate(date: string) {
 export default function ExitingProjectCard({ project }: { project: Project }) {
   const memberLabel = `${project.participantIds.length}/${project.targetMemberCount}`;
   const startedLabel = formatDate(project.startedAt ?? project.createdAt);
+  const endLabel = formatDate(project.endAt ?? project.completedAt ?? "");
+  const periodLabel = endLabel ? `${startedLabel} ~ ${endLabel}` : startedLabel;
+  const bailLabel = (project.bail ?? 0).toLocaleString();
 
   return (
     <Link
       href={`/exiting/${project.id}`}
-      className="group flex min-h-[430px] flex-col overflow-hidden rounded-lg bg-white shadow-[0_18px_45px_rgba(17,24,39,0.08)] ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-[0_24px_64px_rgba(17,24,39,0.14)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-500"
+      className="group relative flex min-h-[520px] flex-col overflow-hidden rounded-[18px] bg-[#f8f8f8] transition hover:-translate-y-1 hover:shadow-[0_22px_54px_rgba(17,24,39,0.13)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-500"
     >
-      <div className="relative aspect-[5/3] overflow-hidden bg-gray-100">
+      <div className="relative h-[310px] overflow-hidden bg-gray-100">
         {project.thumbnailImage ? (
           <Image
             src={project.thumbnailImage}
             alt={`${project.title} 썸네일`}
             width={500}
-            height={300}
+            height={360}
             className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
           />
         ) : (
@@ -38,42 +41,56 @@ export default function ExitingProjectCard({ project }: { project: Project }) {
             EXIT
           </div>
         )}
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,39,0)_42%,rgba(17,24,39,0.68)_100%)]" />
-        <span className="absolute left-4 top-4 rounded bg-emerald-500 px-3 py-1.5 text-xs font-black text-white">
-          {statusLabel}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02)_30%,rgba(0,0,0,0.64)_100%)]" />
+        <span className="absolute right-5 top-5 inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur">
+          <FiHeart aria-hidden="true" />
         </span>
-        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3 text-sm font-bold text-white">
-          <span className="inline-flex items-center gap-1.5">
-            <FiUsers aria-hidden="true" />
-            {memberLabel}명
-          </span>
-          <span className="inline-flex items-center gap-1.5">
+        <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-white">
+          <div className="flex items-center gap-4 text-sm font-bold">
+            <span className="inline-flex items-center gap-1.5">
+              <FiUsers aria-hidden="true" />
+              {memberLabel}
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <FiHeart aria-hidden="true" />
+              {project.likeCount ?? project.tags.length}
+            </span>
+          </div>
+          <span className="hidden items-center gap-1.5 text-sm font-bold sm:inline-flex">
             <FiCalendar aria-hidden="true" />
-            {startedLabel}
+            {periodLabel}
           </span>
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col px-6 py-7">
         <div className="mb-3 flex flex-wrap items-center gap-2">
-          <span className="rounded bg-emerald-50 px-2.5 py-1 text-xs font-black text-emerald-700">
+          <span className="rounded bg-white px-2.5 py-1 text-xs font-black text-emerald-700 ring-1 ring-emerald-100">
             {project.category}
           </span>
+          <span className="rounded bg-white px-2.5 py-1 text-xs font-black text-gray-600 ring-1 ring-gray-200">
+            {statusLabel}
+          </span>
+        </div>
+
+        <h2 className="text-2xl font-black leading-tight text-gray-950">
+          [{project.address ?? "온라인"}] {project.title}
+        </h2>
+        <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">{project.summary}</p>
+
+        <div className="mt-5 flex flex-wrap gap-2">
           {project.tags.slice(0, 2).map((tag) => (
-            <span key={tag} className="rounded bg-gray-100 px-2.5 py-1 text-xs font-bold text-gray-600">
+            <span key={tag} className="rounded bg-[#ececec] px-3 py-1.5 text-sm font-semibold text-[#4e4e4e]">
               {tag}
             </span>
           ))}
         </div>
 
-        <h2 className="text-xl font-black leading-snug text-gray-950">{project.title}</h2>
-        <p className="mt-3 line-clamp-3 text-sm leading-6 text-gray-600">{project.summary}</p>
-
-        <div className="mt-auto flex items-center justify-between gap-4 pt-6 text-sm">
-          <span className="min-w-0 truncate font-bold text-gray-500">{getAuthorName(project.authorId)}</span>
-          <span className="inline-flex shrink-0 items-center gap-1.5 font-black text-emerald-600">
-            상세 보기
-            <FiArrowRight className="transition group-hover:translate-x-1" aria-hidden="true" />
+        <div className="mt-auto flex items-end justify-between gap-4 pt-8">
+          <span className="min-w-0 truncate text-sm font-bold text-gray-500">{getAuthorName(project.authorId)}</span>
+          <span className="inline-flex shrink-0 items-center gap-2 text-2xl font-black text-gray-950">
+            <FiShield className="text-emerald-500" aria-hidden="true" />
+            {bailLabel}
           </span>
         </div>
       </div>

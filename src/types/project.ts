@@ -18,5 +18,10 @@ export interface Project {
   targetMemberCount: number;
   createdAt: string;
   startedAt?: string;
+  endAt?: string;
   completedAt?: string;
+  address?: string;
+  bail?: number;
+  frequency?: number;
+  likeCount?: number;
 }
