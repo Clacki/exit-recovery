@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const footerLinks = [
-  { label: "exiter", href: "/exiter/userList" },
+  { label: "exiter", href: "/exiter" },
   { label: "exiting", href: "/exiting" },
   { label: "exited", href: "/exited" },
   { label: "검색", href: "/search" },

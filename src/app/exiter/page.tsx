@@ -1,5 +1,5 @@
 import ExiterListPage from "@/features/exiter/ExiterListPage";
 
-export default function UserListPage() {
+export default function ExiterPage() {
   return <ExiterListPage />;
 }

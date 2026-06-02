@@ -7,4 +7,6 @@ export interface User {
   profileImage: string;
   bio: string;
   skills: string[];
+  interests?: string[];
+  keywords?: string[];
 }

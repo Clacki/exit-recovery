@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navItems = [
-  { href: "/exiter/userList", label: "exiter" },
+  { href: "/exiter", label: "exiter" },
   { href: "/exiting", label: "exiting" },
   { href: "/exited", label: "exited" },
 ];
