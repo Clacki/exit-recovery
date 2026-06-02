@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiArrowLeft, FiHeart, FiMessageCircle, FiShield, FiUsers } from "react-icons/fi";
 
+import { Button, Card, Tag } from "@/components/ui";
 import { mockUsers } from "@/data/mockUsers";
 import type { Project } from "@/types/project";
 import type { User } from "@/types/user";
@@ -24,18 +25,12 @@ function getParticipants(project: Project) {
     .filter((user): user is User => Boolean(user));
 }
 
-function InfoRow({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+function InfoRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex min-h-20 flex-col justify-center gap-2 rounded-[14px] bg-[#f8f8f8] px-5 py-4 sm:min-h-24 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+    <Card className="flex min-h-20 flex-col justify-center gap-2 px-5 py-4 sm:min-h-24 sm:flex-row sm:items-center sm:justify-between sm:px-8">
       <dt className="text-xl font-black text-gray-950 sm:text-3xl">{label}</dt>
-      <dd className="text-xl font-black text-emerald-500 sm:text-3xl">{children}</dd>
-    </div>
+      <dd className="text-xl font-black text-[#3ebd5d] sm:text-3xl">{children}</dd>
+    </Card>
   );
 }
 
@@ -50,7 +45,7 @@ export default function ExitingProjectDetailPage({ project }: ExitingProjectDeta
       <div className="mx-auto w-full max-w-[1328px] rounded-[14px] bg-white p-5 sm:p-10 lg:p-24">
         <Link
           href="/exiting"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-black text-gray-500 transition hover:text-emerald-600"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-black text-gray-500 transition hover:text-[#3ebd5d]"
         >
           <FiArrowLeft aria-hidden="true" />
           진행 중 프로젝트 목록
@@ -74,25 +69,21 @@ export default function ExitingProjectDetailPage({ project }: ExitingProjectDeta
             )}
           </div>
 
-          <div className="mb-5 rounded-[14px] bg-[#f8f8f8] p-6 sm:p-8">
+          <Card className="mb-5 p-6 sm:p-8">
             <div className="mb-4 flex flex-wrap gap-2">
-              <span className="rounded bg-emerald-500 px-3 py-1.5 text-sm font-black text-white">진행 중</span>
-              <span className="rounded bg-white px-3 py-1.5 text-sm font-black text-emerald-700 ring-1 ring-emerald-100">
-                {project.category}
-              </span>
-              <span className="rounded bg-white px-3 py-1.5 text-sm font-black text-gray-700 ring-1 ring-gray-200">
-                {project.address ?? "온라인"}
-              </span>
+              <Tag variant="status">진행 중</Tag>
+              <Tag variant="category">{project.category}</Tag>
+              <Tag className="bg-white text-gray-700 ring-1 ring-gray-200">{project.address ?? "온라인"}</Tag>
             </div>
             <h1 className="text-3xl font-black leading-tight text-gray-950 sm:text-5xl">{project.title}</h1>
             <p className="mt-5 text-base font-semibold leading-8 text-gray-600 sm:text-2xl">{project.description}</p>
-          </div>
+          </Card>
 
           <div className="flex flex-wrap gap-3">
             {project.tags.map((tag) => (
-              <span key={tag} className="rounded bg-[#ececec] px-4 py-2 text-base font-semibold text-[#4e4e4e] sm:text-xl">
+              <Tag key={tag} variant="skill" size="lg">
                 {tag}
-              </span>
+              </Tag>
             ))}
           </div>
         </section>
@@ -101,7 +92,7 @@ export default function ExitingProjectDetailPage({ project }: ExitingProjectDeta
           <h2 className="mb-6 text-3xl font-black text-gray-950 sm:text-5xl">프로젝트 정보</h2>
 
           <dl className="grid gap-5">
-            <InfoRow label="모집현황">
+            <InfoRow label="모집 현황">
               <span className="inline-flex items-center gap-3">
                 {memberLabel}
                 <FiUsers aria-hidden="true" />
@@ -113,7 +104,7 @@ export default function ExitingProjectDetailPage({ project }: ExitingProjectDeta
                 <FiHeart aria-hidden="true" />
               </span>
             </InfoRow>
-            <InfoRow label="1인당 보석금">
+            <InfoRow label="1인당 보증금">
               <span className="inline-flex items-center gap-3">
                 {bailLabel}
                 <FiShield aria-hidden="true" />
@@ -125,16 +116,16 @@ export default function ExitingProjectDetailPage({ project }: ExitingProjectDeta
               <InfoRow label="모집 장소">{project.address ?? "온라인"}</InfoRow>
             </div>
 
-            <div className="rounded-[14px] bg-[#f8f8f8] p-5 sm:p-8">
-              <dt className="mb-5 text-xl font-black text-gray-950 sm:text-3xl">모집기술</dt>
+            <Card className="p-5 sm:p-8">
+              <dt className="mb-5 text-xl font-black text-gray-950 sm:text-3xl">모집 기술</dt>
               <dd className="flex flex-wrap gap-3">
                 {project.tags.map((tag) => (
-                  <span key={tag} className="rounded bg-[#ececec] px-4 py-2 text-base font-semibold text-[#4e4e4e]">
+                  <Tag key={tag} variant="skill">
                     {tag}
-                  </span>
+                  </Tag>
                 ))}
               </dd>
-            </div>
+            </Card>
 
             <InfoRow label="모임 빈도">주 {project.frequency ?? 1}회</InfoRow>
             <InfoRow label="진행 기간">
@@ -142,7 +133,7 @@ export default function ExitingProjectDetailPage({ project }: ExitingProjectDeta
             </InfoRow>
           </dl>
 
-          <div className="mt-12 rounded-[14px] bg-[#f8f8f8] p-6 sm:p-8">
+          <Card className="mt-12 p-6 sm:p-8">
             <h3 className="mb-6 text-2xl font-black text-gray-950 sm:text-4xl">프로젝트 리더</h3>
             {leader ? (
               <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
@@ -158,35 +149,28 @@ export default function ExitingProjectDetailPage({ project }: ExitingProjectDeta
                     <p className="truncate text-2xl font-black text-gray-950 sm:text-4xl">{leader.name}</p>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {leader.skills.slice(0, 3).map((skill) => (
-                        <span key={skill} className="rounded-full bg-[#ececec] px-4 py-1.5 text-sm font-semibold text-[#4e4e4e]">
+                        <Tag key={skill} variant="skill" className="rounded-full">
                           {skill}
-                        </span>
+                        </Tag>
                       ))}
                     </div>
                   </div>
                 </Link>
-                <button
-                  type="button"
-                  className="inline-flex h-14 items-center justify-center gap-2 rounded-[14px] bg-black px-6 text-base font-black text-white sm:h-16"
-                >
+                <Button type="button" variant="secondary" size="lg">
                   <FiMessageCircle aria-hidden="true" />
                   리더에게 채팅하기
-                </button>
+                </Button>
               </div>
             ) : (
               <p className="text-base font-semibold text-gray-500">리더 정보를 준비 중입니다.</p>
             )}
-          </div>
+          </Card>
 
-          <div className="mt-6 rounded-[14px] bg-[#f8f8f8] p-6 sm:p-8">
+          <Card className="mt-6 p-6 sm:p-8">
             <h3 className="mb-5 text-2xl font-black text-gray-950 sm:text-4xl">참여 멤버</h3>
             <div className="grid gap-4 sm:grid-cols-2">
               {participants.map((participant) => (
-                <Link
-                  key={participant.id}
-                  href={`/exiter/${participant.id}`}
-                  className="flex items-center gap-4 rounded-[14px] bg-white p-4"
-                >
+                <Link key={participant.id} href={`/exiter/${participant.id}`} className="flex items-center gap-4 rounded-[14px] bg-white p-4">
                   <Image
                     src={participant.profileImage}
                     alt={participant.name}
@@ -201,14 +185,11 @@ export default function ExitingProjectDetailPage({ project }: ExitingProjectDeta
                 </Link>
               ))}
             </div>
-          </div>
+          </Card>
 
-          <button
-            type="button"
-            className="mt-12 h-20 w-full rounded-[14px] bg-emerald-500 text-2xl font-black text-white transition hover:bg-emerald-600 sm:h-24 sm:text-4xl"
-          >
+          <Button type="button" size="xl" className="mt-12 w-full">
             프로젝트 참여 신청하기
-          </button>
+          </Button>
         </section>
       </div>
     </div>
