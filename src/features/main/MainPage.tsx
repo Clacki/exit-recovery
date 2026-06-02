@@ -1,20 +1,16 @@
+import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
+
+import { ProjectCard } from "@/components/project";
 import { mockProjects } from "@/data/mockProjects";
 import { mockUsers } from "@/data/mockUsers";
-import type { Project, ProjectStatus } from "@/types/project";
+import type { Project } from "@/types/project";
 import type { User } from "@/types/user";
-import Link from "next/link";
-import { FiArrowRight, FiHeart, FiUsers } from "react-icons/fi";
-
-const statusLabels: Record<ProjectStatus, string> = {
-  recruiting: "모집 중",
-  inProgress: "진행 중",
-  completed: "완료",
-};
 
 const categories = [
   { label: "공유 서비스", image: "/images/main/category-community.png" },
   { label: "여행", image: "/images/main/category-travel.png" },
-  { label: "이커머스", image: "/images/main/category-commerce.png" },
+  { label: "커머스", image: "/images/main/category-commerce.png" },
   { label: "O2O", image: "/images/main/category-o2o.png" },
   { label: "엔터테인먼트", image: "/images/main/category-entertainment.png" },
   { label: "모빌리티", image: "/images/main/category-mobility.png" },
@@ -26,77 +22,17 @@ function getProjectHref(project: Project) {
   return project.status === "completed" ? `/exited/${project.id}` : `/exiting/${project.id}`;
 }
 
-function getUserName(userId: string) {
-  return mockUsers.find((user) => user.id === userId)?.name ?? "EXIT 팀";
-}
-
-function ProjectCard({ project }: { project: Project }) {
-  const memberLabel = `${project.participantIds.length}/${project.targetMemberCount}`;
-
-  return (
-    <Link
-      href={getProjectHref(project)}
-      className="group flex min-h-[420px] flex-col overflow-hidden rounded-lg bg-white shadow-[0_18px_45px_rgba(17,24,39,0.08)] ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(17,24,39,0.12)]"
-    >
-      <div className="relative flex min-h-56 flex-1 items-end overflow-hidden bg-[#111827]">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-90 transition duration-300 group-hover:scale-105"
-          style={{ backgroundImage: `url(${project.thumbnailImage})` }}
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.08)_0%,rgba(0,0,0,0.62)_100%)]" />
-        <div className="relative flex w-full items-end justify-between gap-4 p-5 text-white">
-          <div className="flex items-center gap-4 text-sm font-semibold">
-            <span className="inline-flex items-center gap-1.5">
-              <FiUsers aria-hidden="true" />
-              {memberLabel}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <FiHeart aria-hidden="true" />
-              {project.tags.length}
-            </span>
-          </div>
-          <span className="rounded bg-white/90 px-2.5 py-1 text-xs font-bold text-gray-900">
-            {statusLabels[project.status]}
-          </span>
-        </div>
-      </div>
-
-      <div className="flex min-h-48 flex-col justify-between bg-[#f8f8f8] p-5">
-        <div>
-          <p className="mb-2 text-sm font-bold text-emerald-600">{project.category}</p>
-          <h3 className="text-xl font-bold leading-snug text-gray-950">{project.title}</h3>
-          <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">{project.summary}</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {project.tags.slice(0, 3).map((tag) => (
-              <span
-                key={tag}
-                className="rounded bg-white px-2.5 py-1 text-xs font-semibold text-gray-600 ring-1 ring-gray-200"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="mt-5 flex items-center justify-between text-sm text-gray-500">
-          <span>{getUserName(project.authorId)}</span>
-          <span>{project.startedAt ?? project.createdAt}</span>
-        </div>
-      </div>
-    </Link>
-  );
-}
-
 function ProjectSection({ eyebrow, title, projects }: { eyebrow: string; title: string; projects: Project[] }) {
   return (
     <section className="mx-auto w-full max-w-[1280px] px-5 py-14 sm:px-8 lg:px-10">
       <div className="mb-8 flex items-end justify-between gap-5">
         <div>
-          <p className="mb-2 text-lg font-extrabold text-emerald-500">{eyebrow}</p>
+          <p className="mb-2 text-lg font-extrabold text-[#3ebd5d]">{eyebrow}</p>
           <h2 className="text-3xl font-black leading-tight text-gray-950 sm:text-4xl">{title}</h2>
         </div>
         <Link
           href="/exiting"
-          className="hidden shrink-0 items-center gap-2 text-sm font-bold text-gray-400 transition hover:text-emerald-600 sm:inline-flex"
+          className="hidden shrink-0 items-center gap-2 text-sm font-bold text-gray-400 transition hover:text-[#3ebd5d] sm:inline-flex"
         >
           전체 프로젝트 보기
           <FiArrowRight aria-hidden="true" />
@@ -105,7 +41,7 @@ function ProjectSection({ eyebrow, title, projects }: { eyebrow: string; title: 
 
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+          <ProjectCard key={project.id} project={project} href={getProjectHref(project)} variant="compact" />
         ))}
       </div>
     </section>
@@ -119,11 +55,11 @@ function MakerCard({ user }: { user: User }) {
       className="rounded-lg bg-white p-5 ring-1 ring-gray-200 transition hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(17,24,39,0.08)]"
     >
       <div
-        className="mb-5 h-24 w-24 rounded-full bg-cover bg-center bg-gray-100 ring-4 ring-emerald-50"
+        className="mb-5 h-24 w-24 rounded-full bg-gray-100 bg-cover bg-center ring-4 ring-emerald-50"
         style={{ backgroundImage: `url(${user.profileImage})` }}
       />
       <p className="text-lg font-black text-gray-950">{user.name}</p>
-      <p className="mt-1 text-sm font-bold text-emerald-600">{user.role}</p>
+      <p className="mt-1 text-sm font-bold text-[#3ebd5d]">{user.role}</p>
       <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">{user.bio}</p>
     </Link>
   );
@@ -154,7 +90,7 @@ export default function MainPage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/exiting"
-                className="inline-flex items-center gap-2 rounded-md bg-emerald-500 px-5 py-3 text-sm font-black text-white transition hover:bg-emerald-400"
+                className="inline-flex items-center gap-2 rounded-md bg-[#3ebd5d] px-5 py-3 text-sm font-black text-white transition hover:bg-[#34aa51]"
               >
                 프로젝트 둘러보기
                 <FiArrowRight aria-hidden="true" />
@@ -191,7 +127,7 @@ export default function MainPage() {
         <div className="mx-auto w-full max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10">
           <div className="mb-8 flex items-end justify-between gap-5">
             <div>
-              <p className="mb-2 text-lg font-extrabold text-emerald-500">category</p>
+              <p className="mb-2 text-lg font-extrabold text-[#3ebd5d]">category</p>
               <h2 className="text-3xl font-black leading-tight text-gray-950 sm:text-4xl">관심 카테고리</h2>
             </div>
           </div>
@@ -214,19 +150,19 @@ export default function MainPage() {
         </div>
       </section>
 
-      <ProjectSection eyebrow="exited" title="완료된 프로젝트의 회복 사례" projects={completedProjects} />
+      <ProjectSection eyebrow="exited" title="완료한 프로젝트의 회고 기록" projects={completedProjects} />
 
       <section className="mx-auto w-full max-w-[1280px] px-5 py-14 sm:px-8 lg:px-10">
         <div className="mb-8 flex items-end justify-between gap-5">
           <div>
-            <p className="mb-2 text-lg font-extrabold text-emerald-500">exiter</p>
-            <h2 className="text-3xl font-black leading-tight text-gray-950 sm:text-4xl">프로젝트를 함께할 엑시터</h2>
+            <p className="mb-2 text-lg font-extrabold text-[#3ebd5d]">exiter</p>
+            <h2 className="text-3xl font-black leading-tight text-gray-950 sm:text-4xl">프로젝트를 함께한 메이커</h2>
           </div>
           <Link
             href="/exiter/userList"
-            className="hidden shrink-0 items-center gap-2 text-sm font-bold text-gray-400 transition hover:text-emerald-600 sm:inline-flex"
+            className="hidden shrink-0 items-center gap-2 text-sm font-bold text-gray-400 transition hover:text-[#3ebd5d] sm:inline-flex"
           >
-            엑시터 더보기
+            메이커 더보기
             <FiArrowRight aria-hidden="true" />
           </Link>
         </div>
@@ -238,10 +174,10 @@ export default function MainPage() {
       </section>
 
       <section className="mx-auto w-full max-w-[1280px] px-5 pb-20 sm:px-8 lg:px-10">
-        <div className="flex flex-col items-start justify-between gap-8 rounded-lg bg-emerald-500 p-8 text-white sm:flex-row sm:items-center lg:p-12">
+        <div className="flex flex-col items-start justify-between gap-8 rounded-lg bg-[#3ebd5d] p-8 text-white sm:flex-row sm:items-center lg:p-12">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.18em]">EXIT</p>
-            <p className="mt-3 text-2xl font-black leading-snug sm:text-3xl">당신을 기다리는 다양한 신규 프로젝트</p>
+            <p className="mt-3 text-2xl font-black leading-snug sm:text-3xl">당신을 기다리는 다음 프로젝트</p>
           </div>
           <Link
             href="/exiting"
