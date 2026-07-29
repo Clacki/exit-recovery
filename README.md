@@ -18,10 +18,9 @@
 현재 저장소에는 페이지 전체 스크린샷 파일이 없어, 아래에는 복구된 화면에서 실제 사용하는 이미지 자산을 정리했습니다.
 메인 히어로, 프로젝트 카드, 사용자 목록 UI에서 각각 사용됩니다.
 
-| 메인 히어로 | 진행 중 프로젝트 |
-| --- | --- |
-| <img src="public/images/main/main-hero.png" alt="현재 메인 화면 히어로 이미지" width="100%" /> | <img src="public/images/projects/project-interview-archive.png" alt="진행 중 프로젝트 카드 이미지" width="100%" /> |
-
+| 메인 히어로 |
+| --- |
+| <img src="public/images/main/main-hero.png" alt="현재 메인 화면 히어로 이미지" width="100%" /> 
 | 모집 프로젝트 | 완료 프로젝트 |
 | --- | --- |
 | <img src="public/images/projects/project-sprint-matching.png" alt="모집 프로젝트 카드 이미지" width="100%" /> | <img src="public/images/projects/project-exit-checklist.png" alt="완료 프로젝트 카드 이미지" width="100%" /> |
