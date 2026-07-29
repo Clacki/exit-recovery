@@ -19,16 +19,17 @@
 메인 히어로, 프로젝트 카드, 사용자 목록 UI에서 각각 사용됩니다.
 
 
-| 메인 히어로 | 
-| --- | 
-| <img src="public/images/main/main-hero.png" alt="현재 메인 화면 히어로 이미지" width="100%" /> | 
+| 메인 히어로 | 진행 중 프로젝트 |
+| --- | --- |
+| <img src="public/images/main/main-hero.png" alt="현재 메인 화면 히어로 이미지" width="100%" /> | <img src="public/images/projects/project-interview-archive.png" alt="진행 중 프로젝트 카드 이미지" width="100%" /> |
+
 | 모집 프로젝트 | 완료 프로젝트 |
 | --- | --- |
 | <img src="public/images/projects/project-sprint-matching.png" alt="모집 프로젝트 카드 이미지" width="100%" /> | <img src="public/images/projects/project-exit-checklist.png" alt="완료 프로젝트 카드 이미지" width="100%" /> |
+
 | Exiter 사용자 | Exiter 사용자 |
 | --- | --- |
 | <p align="center"><img src="public/images/users/avatar-joon.png" alt="Exiter 사용자 아바타" width="220" /></p> | <p align="center"><img src="public/images/users/avatar-mina.png" alt="Exiter 사용자 아바타" width="220" /></p> |
-
 ## 프로젝트 소개
 
 원본 EXIT는 대학생과 취업 준비생이 사이드 프로젝트 팀원을 찾을 수 있도록 만든 2022년 팀 프로젝트입니다.
