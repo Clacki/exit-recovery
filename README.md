@@ -20,7 +20,7 @@
 
 
 | 메인 히어로 | 
-| --- | --- |
+| --- |
 | <img src="public/images/main/main-hero.png" alt="현재 메인 화면 히어로 이미지" width="100%" /> |
 
 | 모집 프로젝트 | 완료 프로젝트 |
